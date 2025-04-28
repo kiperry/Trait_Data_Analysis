@@ -121,6 +121,7 @@ boxplot(fun.div$fdis ~ env$trmt)
 td.go.2 <- gowdis(t)
 
 ## Gawdis dissimilarity matrix
+str(t)
 td.ga <- gawdis(t, w.type = "optimized", opti.maxiter = 300,
                 groups.weight = T, groups = c(1, 2, 2, 2, 2, 2, 3, 2, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14))
 attr(td.ga, "weights")
@@ -130,7 +131,7 @@ scatter(pco.ga)
 
 pco.ga$li
 sum(pco.ga$eig[1:5]) / sum(pco.ga$eig) 
-sum(pco.ga$eig[1:3]) / sum(pco.ga$eig)
+sum(pco.ga$eig[1:4]) / sum(pco.ga$eig)
 sum(pco.ga$eig[1:3]) / sum(pco.ga$eig)
 sum(pco.ga$eig[1:2]) / sum(pco.ga$eig)
 
@@ -324,10 +325,9 @@ plot(testQaxes.comb.ant.env, alpha = 0.1, type = "table",
 plot(testRaxes.comb.ant.env, alpha = 0.1, type = "table",
      stat = "D2")
 
-par(mfrow = c(1, 2))
-plot(testQaxes.comb.ant.env, alpha = 0.1, type = "biplot",
-     stat = "D2", col = c("black", "blue", "orange", "green"))
-plot(testRaxes.comb.ant.env, alpha = 0.1, type = "biplot",
-     stat = "D2", col = c("black", "blue", Holly M. Martinson, 
-Michael J. Raupp
-Ecospher"orange", "green"))
+
+# observed functional alpha diversity
+# run rao function first
+ant.rao <- Rao(sample = t(a), dfunc = td.go, dphyl = NULL, weight = FALSE, Jost = TRUE, structure = NULL)
+ant.rao <- ant.rao$FD$Alpha
+ant.rao
